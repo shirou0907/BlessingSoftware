@@ -497,6 +497,7 @@ public class XuatKhoJFrameCreat extends javax.swing.JFrame {
                 for(ChiTietXuat ctx: list) {
                     if(id.equals(ctx.getMahh())){
                         jtfMahh.setText(ctx.getMahh());
+                        jcbTenhh.setSelectedIndex(listmahh.indexOf(jtfMahh.getText()));
                         jtfSolo.setText(ctx.getSolo());
                         jtfSoluong.setText(Integer.toString(ctx.getSoluong()));
                         break;

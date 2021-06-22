@@ -492,6 +492,7 @@ public class NhapKhoJFrameCreat extends javax.swing.JFrame {
                 for(ChiTietNhap ctn: list) {
                     if(id.equals(ctn.getMahh())){
                         jtfMahh.setText(ctn.getMahh());
+                        jcbTenhh.setSelectedIndex(listmahh.indexOf(jtfMahh.getText()));
                         jtfSolo.setText(ctn.getSolo());
                         jtfSoluong.setText(Integer.toString(ctn.getSoluong()));
                         break;
@@ -513,7 +514,7 @@ public class NhapKhoJFrameCreat extends javax.swing.JFrame {
             else{
                 for(ChiTietNhap ctn:list){
                     if(ctn.getMahh().equals(jtfMahh.getText())){
-                    ctn.setMahh(jtfMahh.getText());
+                    ctn.setMahh(jtfMahh.getText());                   
                     ctn.setSolo(jtfSolo.getText());
                     ctn.setSoluong(Integer.valueOf(jtfSoluong.getText()));
                     break;
