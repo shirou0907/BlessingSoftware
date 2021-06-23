@@ -72,8 +72,8 @@ public class FormNVController {
         btnSubmit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               if(jtfMaNhanVien.getText().length()==0){
-               jlbMes.setText("Bạn phải nhập thông tin! ");
+               if(jtfMaNhanVien.getText().length()==0 || jtfMaNhanVien.getText().length()==0 || jtfNgaySinh.getDate() == null || jtfCMND.getText().length()==0 || jtfSdt.getText().length()==0 || jtfChucVu.getText().length()==0) {
+               jlbMes.setText("Bạn chưa nhập đủ thông tin! ");
                }
                else{
                    nv.setMavn(jtfMaNhanVien.getText());

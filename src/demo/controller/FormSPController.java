@@ -55,8 +55,8 @@ public class FormSPController {
         btnSubmit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               if(jtfMasp.getText().length()==0){
-               jlbMes.setText("Bạn phải nhập thông tin! ");
+               if(jtfMasp.getText().length()==0 || jtfTensp.getText().length() == 0 || jtfDonvitinh.getText().length()==0 || jtfSolo.getText().length()==0){
+               jlbMes.setText("Bạn chưa nhập đầy đủ thông tin! ");
                }
                else{
                    sp.setMahh(jtfMasp.getText());

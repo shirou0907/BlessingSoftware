@@ -8,8 +8,12 @@ package demo.view;
 import demo.controller.FormSPController;
 import demo.dao.DBConnect;
 import demo.model.SanPham;
+import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author MY PC
  */
 public class SanPhamJFrame extends javax.swing.JFrame {
-
+    List<SanPham> list = new ArrayList<>();
     /**
      * Creates new form NhanVienJFrame
      */
@@ -27,6 +31,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         FormSPController controller = new FormSPController(btnSubmit, jtfMasp, jtfTensp, jtfDonvitinh, jtfSolo, jtfSoluong, jlbMes);
         controller.setView(sp);
         controller.setEvent();
+        jtfSoluong.setEditable(false);
 
     }
 
@@ -55,6 +60,8 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         jtfDonvitinh = new javax.swing.JTextField();
         jtfSolo = new javax.swing.JTextField();
         jtfSoluong = new javax.swing.JTextField();
+        jlbCheckID = new javax.swing.JLabel();
+        jlbC = new javax.swing.JLabel();
         jlbMes = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
 
@@ -98,20 +105,33 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Số lượng");
 
+        jtfMasp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jtfMaspMouseExited(evt);
+            }
+        });
+
+        jlbC.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfMasp, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(jtfTensp))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                    .addComponent(jlbCheckID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfMasp, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jtfTensp))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbC, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,8 +153,11 @@ public class SanPhamJFrame extends javax.swing.JFrame {
                         .addComponent(jtfDonvitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jtfMasp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                        .addComponent(jtfMasp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlbC, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(1, 1, 1)
+                .addComponent(jlbCheckID, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
@@ -149,6 +172,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
+        jlbMes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlbMes.setForeground(new java.awt.Color(255, 0, 0));
 
         btnDelete.setText("Delete");
@@ -167,7 +191,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -238,6 +262,51 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void jtfMaspMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfMaspMouseExited
+        // TODO add your handling code here:
+        Connection cons = DBConnect.getConnection();
+            try {
+                String sql = "select mahh from hanghoa";
+                PreparedStatement ps = cons.prepareCall(sql);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()) {
+                    SanPham sp = new SanPham();
+                    sp.setMahh(rs.getString("mahh"));
+                    list.add(sp);
+                }  
+                
+                rs.close();
+                ps.close();
+                cons.close();                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+                e.printStackTrace();
+            }
+            
+            for(SanPham sp : list) {
+                if(sp.getMahh().equals(jtfMasp.getText())){
+                    jlbC.setText("X");
+                    jlbC.setForeground(Color.red);
+                    jlbCheckID.setText("Mã sản phẩm đã tồn tại, vui lòng nhập lại!");
+                    jlbCheckID.setForeground(Color.red);
+                    jtfMasp.setText("");
+                    break;
+                }
+                else if(jtfMasp.getText().length()==0){
+                    jlbC.setText("X");
+                    jlbC.setForeground(Color.red);
+                    jlbCheckID.setText("Bạn phải nhập mã sản phẩm!");
+                    jlbCheckID.setForeground(Color.red);
+                    jtfMasp.setText("");
+                }
+                else{
+                    jlbCheckID.setText("");
+                    jlbC.setText("V");
+                    jlbC.setForeground(Color.GREEN);
+                }
+            }
+    }//GEN-LAST:event_jtfMaspMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +324,8 @@ public class SanPhamJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jlbC;
+    private javax.swing.JLabel jlbCheckID;
     private javax.swing.JLabel jlbMes;
     private javax.swing.JTextField jtfDonvitinh;
     private javax.swing.JTextField jtfMasp;
