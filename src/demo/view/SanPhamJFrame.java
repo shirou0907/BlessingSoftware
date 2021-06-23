@@ -105,6 +105,11 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Số lượng");
 
+        jtfMasp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfMaspFocusLost(evt);
+            }
+        });
         jtfMasp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jtfMaspMouseExited(evt);
@@ -264,6 +269,11 @@ public class SanPhamJFrame extends javax.swing.JFrame {
 
     private void jtfMaspMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfMaspMouseExited
         // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jtfMaspMouseExited
+
+    private void jtfMaspFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfMaspFocusLost
+        // TODO add your handling code here:
         Connection cons = DBConnect.getConnection();
             try {
                 String sql = "select mahh from hanghoa";
@@ -305,7 +315,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
                     jlbC.setForeground(Color.GREEN);
                 }
             }
-    }//GEN-LAST:event_jtfMaspMouseExited
+    }//GEN-LAST:event_jtfMaspFocusLost
 
     /**
      * @param args the command line arguments
