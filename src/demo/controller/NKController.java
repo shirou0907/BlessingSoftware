@@ -105,7 +105,7 @@ public class NKController {
                     NhapKhoJFrame frame = new NhapKhoJFrame(hdn);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(false);
-                    frame.setTitle("Thông tin nhân viên");
+                    frame.setTitle("Thông tin hóa đơn");
                     frame.setVisible(true);
                 }
             }   
